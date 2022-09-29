@@ -25,4 +25,4 @@ shortUrl:{
 },{
     timestamps:true
 });
-module.exports=mongoose.Model('Url',urlSchema)
+module.exports=mongoose.model('Url',urlSchema)
