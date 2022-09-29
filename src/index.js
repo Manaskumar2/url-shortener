@@ -12,6 +12,7 @@ mongoose.connect("mongodb+srv://manaskumar:iFVJhjYrsH7iars8@cluster0.s4pqkzd.mon
 .catch ( err => console.log(err) )
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
 app.use('/', route);
 
 
