@@ -60,4 +60,34 @@ if(!body.shortUrl){
     }
 }
 
-module.exports.createUrl=createUrl
+
+
+let getUrl= async function (req,res){
+    try {
+        let urlCode=req.params.urlCode
+
+        if (!urlCode){
+            return res.status(400).send({status:false,message:"please give urlCode"})
+        }
+
+        if (!shortId.isValid(urlCode)){
+            return res.status(400).send({status:false,message:"Invalid urlCode"})
+        }
+
+        let checkUrlCode= await urlModel.findOne({urlCode:urlCode})
+
+        if(!checkUrlCode){
+            return res.status(400).send({status:false,message:"No url found"})
+        }
+
+        return res.status(302).redirect(checkUrlCode.longUrl)
+        
+    } catch (error) {
+    return res.status(500).send({status:false,message:error.message})
+        
+    }
+}
+
+module.exports={
+    createUrl,getUrl
+}

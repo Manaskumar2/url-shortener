@@ -1,12 +1,13 @@
 const express = require('express');
 const router =express.Router()
-const urlController=require('../controllers/urlController')
+const {createUrl,getUrl}=require('../controllers/urlController')
 
 router.post('/test-me', function(req,res){
     res.send({msg:"this is first api"})
 })
 
-router.post('/url/shorten',urlController.createUrl)
+router.post('/url/shorten',createUrl)
+router.get('/:urlCode',getUrl)
 
 
 
