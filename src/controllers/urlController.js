@@ -82,7 +82,7 @@ let getUrl= async function (req,res){
         let checkUrlCode= await urlModel.findOne({urlCode:urlCode})
         
         if(!checkUrlCode){
-            return res.status(400).send({status:false,message:"No url found"})
+            return res.status(404).send({status:false,message:"No url found"})
         }
         //---------- Redirecting for LongUrl ----------------
         
