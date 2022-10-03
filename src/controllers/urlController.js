@@ -53,15 +53,16 @@ let createUrl=async function(req,res){
     if(checkUnique){
 
     return res.status(200).send({status:true,data:checkUnique})
-    }else{
+    }
         
         let checkUrl=await urlModel.findOne({longUrl:longUrl}).select({_id:0,__v:0,createdAt:0,updatedAt:0})
-        
+
+        if(checkUrl){
         await SET_ASYNC(`${longUrl}`,JSON.stringify(checkUrl))
+        
+        return res.status(200).send({status:true,data:checkUrl})}
 
-            return res.status(200).send({status:true,data:checkUrl})
-
-    } 
+    
         let generateUrl= shortId.generate(longUrl).toLowerCase()
                 
         let createShortUrl=baseurl+"/"+generateUrl
