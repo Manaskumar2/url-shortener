@@ -114,7 +114,7 @@ let getUrl= async function (req,res){
 //------------------ Hit ---------------------------------------
 
 if(checkCached){
-    return res.status(200).redirect(checkCached)
+    return res.status(200).redirect(JSON.parse(checkCached))
 }else{
     
     let checkUrlCode= await urlModel.findOne({urlCode:urlCode})
