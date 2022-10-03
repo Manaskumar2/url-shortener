@@ -51,8 +51,8 @@ let createUrl=async function(req,res){
         
     let checkUnique= await GET_ASYNC(`${longUrl}`)
     if(checkUnique){
-
-    return res.status(200).send({status:true,data:checkUnique})
+    
+    return res.status(200).send({status:true,message:"LongUrl already Shortned",data:JSON.parse(checkUnique)})
     }
         
         let checkUrl=await urlModel.findOne({longUrl:longUrl}).select({_id:0,__v:0,createdAt:0,updatedAt:0})
