@@ -4,6 +4,7 @@ const shortId=require('shortid')
 const validUrl=require('valid-url')
 const baseurl="http://localhost:3000"
 const redis=require('redis')
+const axios=require('axios')
 const {promisify}=require('util')
 
 //---------------------------------------- Caching process------------------------------------------------------------------------------------
@@ -41,7 +42,20 @@ let createUrl=async function(req,res){
         if(!body.longUrl){
             return res.status(400).send({status:false,message:"longUrl is mandotary"})
         }
+
+        // let flag=0
         
+        // await axios.get(longUrl).then(function (response) {
+        //   console.log("success");
+        // }).catch(function (error) {
+        //   flag=1
+        // });
+        
+        // if(flag==1)
+        // return res.status(400).send({status:false,message:"Please send valid Url"})
+
+
+
         if(!validUrl.isHttpsUri(longUrl)){
             return  res.status(400).send({status:false,message:"Invalid LongUrl"})
         }
@@ -79,7 +93,7 @@ let createUrl=async function(req,res){
         
         let create= await urlModel.create(body)
 
-        let filter={longUrl:create.longUrl,shortId:create.shortUrl,urlCode:create.urlCode}
+        let filter={longUrl:create.longUrl,shortUrl:create.shortUrl,urlCode:create.urlCode}
 
         
         res.status(201).send({status:true,message:"Success",data:filter})
