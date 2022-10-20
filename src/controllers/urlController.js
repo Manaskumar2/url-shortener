@@ -4,7 +4,6 @@ const shortId=require('shortid')
 const validUrl=require('valid-url')
 const baseurl="http://localhost:3000"
 const redis=require('redis')
-const axios=require('axios')
 const {promisify}=require('util')
 
 //---------------------------------------- Caching process------------------------------------------------------------------------------------
